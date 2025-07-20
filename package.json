@@ -45,6 +45,10 @@
     "typescript-eslint": "^8.37.0",
     "vitest": "^3.2.4"
   },
+  "peerDependencies": {
+    "aws-xray-sdk": "3.x",
+    "xior": ">=0.7"
+  },
   "publishConfig": {
     "access": "public"
   }
