@@ -1,5 +1,10 @@
 import AWSXRay from 'aws-xray-sdk';
-import type { XiorPlugin, XiorRequestConfig, XiorResponse } from 'xior';
+import {
+  XiorError,
+  type XiorPlugin,
+  type XiorRequestConfig,
+  type XiorResponse,
+} from 'xior';
 
 interface XRayPluginOptions {
   /** Custom name for the X-Ray subsegment (appears as service on X-Ray map) */
@@ -15,7 +20,7 @@ export default function xrayPlugin(
     return async (config: XiorRequestConfig): Promise<XiorResponse> => {
       // Determine subsegment name: use custom serviceName or the request URL
       const subsegmentName =
-        options.serviceName || (config.baseURL ?? '') + config.url;
+        options.serviceName || (config.baseURL ?? 'Remote Server');
 
       return AWSXRay.captureAsyncFunc(
         subsegmentName,
@@ -36,22 +41,23 @@ export default function xrayPlugin(
 
             subsegment?.addAnnotation('status', res.status);
 
-            // Close the subsegment (records end time, sends it to the X-Ray daemon)
-            subsegment?.close();
-
             return res;
           } catch (err) {
             if (typeof err === 'string' || err instanceof Error) {
-              // On error, record error in the subsegment and close it
+              if (err instanceof XiorError && err.response) {
+                subsegment?.addAnnotation('status', err.response.status);
+              }
+
               subsegment?.addError(err);
-              subsegment?.close(err);
             }
 
             throw err;
+          } finally {
+            subsegment?.close();
           }
         },
-        AWSXRay.getSegment(),
-      ); // use current X-Ray segment as parent (if any)
+        AWSXRay.getSegment(), // use current X-Ray segment as parent (if any)
+      );
     };
   };
 }
