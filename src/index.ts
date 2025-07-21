@@ -9,8 +9,6 @@ import {
 interface XRayPluginOptions {
   /** Custom name for the X-Ray subsegment (appears as service on X-Ray map) */
   serviceName?: string;
-  /** (Optional) subsegment namespace; default is 'remote' for HTTP calls */
-  namespace?: string;
 }
 
 export default function xrayPlugin(
@@ -27,7 +25,7 @@ export default function xrayPlugin(
         async (subsegment) => {
           if (subsegment) {
             // Mark this subsegment as a remote call
-            subsegment.namespace = options.namespace || 'remote';
+            subsegment.namespace = 'remote';
 
             // Add annotations for logging/searching in X-Ray
             subsegment.addAnnotation('method', config.method || '');
