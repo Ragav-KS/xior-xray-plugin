@@ -7,7 +7,11 @@ import {
 } from 'xior';
 
 interface XRayPluginOptions {
-  /** Custom name for the X-Ray subsegment (appears as service on X-Ray map) */
+  /**
+   * Custom name for the X-Ray subsegment (appears as service on X-Ray map)
+   *
+   * @default `config.baseURL` if set, otherwise `Remote Server`.
+   */
   serviceName?: string;
 }
 
