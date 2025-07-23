@@ -29,7 +29,8 @@
     "commitlint": "commitlint --edit",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "vitest"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
