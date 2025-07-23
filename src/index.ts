@@ -6,7 +6,7 @@ import {
   type XiorResponse,
 } from 'xior';
 
-interface XRayPluginOptions {
+export interface XRayPluginOptions {
   /**
    * Custom name for the X-Ray subsegment (appears as service on X-Ray map)
    *
@@ -15,9 +15,7 @@ interface XRayPluginOptions {
   serviceName?: string;
 }
 
-export default function xrayPlugin(
-  options: XRayPluginOptions = {},
-): XiorPlugin {
+export function xrayPlugin(options: XRayPluginOptions = {}): XiorPlugin {
   return (adapter) => {
     return async (config: XiorRequestConfig): Promise<XiorResponse> => {
       // Determine subsegment name: use custom serviceName or the request URL
@@ -63,3 +61,5 @@ export default function xrayPlugin(
     };
   };
 }
+
+export default xrayPlugin;
