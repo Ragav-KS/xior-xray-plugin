@@ -24,7 +24,7 @@ export default function xrayPlugin(
       const subsegmentName =
         options.serviceName || (config.baseURL ?? 'Remote Server');
 
-      return AWSXRay.captureAsyncFunc(
+      return await AWSXRay.captureAsyncFunc(
         subsegmentName,
         async (subsegment) => {
           if (subsegment) {
