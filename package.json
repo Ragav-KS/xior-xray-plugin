@@ -1,6 +1,6 @@
 {
   "name": "@ragav-ks/xior-xray-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A Xior plugin to capture all the API calls in AWS X-Ray traces.",
   "keywords": [
     "xior",
