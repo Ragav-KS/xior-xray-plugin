@@ -9,23 +9,24 @@ This plugin integrates AWS X-Ray tracing with Xior HTTP client. It automatically
 ## Installation
 
 ```bash
-npm install xior-xray-plugin aws-xray-sdk
+npm install xior-xray-plugin
 ```
 
 ## Usage
 
 ```typescript
-import { Xior } from 'xior';
-import xrayPlugin from 'xior-xray-plugin';
+import xior from 'xior';
+import { xrayPlugin } from 'xior-xray-plugin';
 
-const client = new Xior({
+const http = xior.create({
   baseURL: 'https://api.example.com',
-  plugins: [
-    xrayPlugin({
-      serviceName: 'my-api-client', // Optional custom name for the service
-    }),
-  ],
 });
+
+http.plugins.use(
+  xrayPlugin({
+    serviceName: 'my-api-client', // Optional custom name for the service
+  }),
+);
 
 // All requests will now be traced in AWS X-Ray
 const response = await client.get('/users');
