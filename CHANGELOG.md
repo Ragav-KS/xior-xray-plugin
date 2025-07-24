@@ -1,5 +1,11 @@
 # Change Log
 
+### [1.2.1](https://github.com/Ragav-KS/xior-xray-plugin/compare/v1.2.0...v1.2.1) (2025-07-24)
+
+### Documentation
+
+- **README:** fix mistake in usage docs ([#9](https://github.com/Ragav-KS/xior-xray-plugin/issues/9)) ([5917cfb](https://github.com/Ragav-KS/xior-xray-plugin/commit/5917cfb92a5a26454353959608079a5506021cd5))
+
 ## [1.2.0](https://github.com/Ragav-KS/xior-xray-plugin/compare/v1.1.0...v1.2.0) (2025-07-23)
 
 ### Features
